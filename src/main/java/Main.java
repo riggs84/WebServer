@@ -1,8 +1,7 @@
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.DefaultServlet;
 import org.eclipse.jetty.servlet.ServletContextHandler;
 import org.eclipse.jetty.servlet.ServletHolder;
-
-import javax.servlet.ServletContext;
 
 public class Main {
 
@@ -11,10 +10,7 @@ public class Main {
 
         ServletContextHandler contextHandler = new ServletContextHandler(ServletContextHandler.SESSIONS);
         server.setHandler(contextHandler);
-        contextHandler.addServlet(new ServletHolder(), "/"); // add object to servletHolder
-
-
-
+        contextHandler.addServlet(new ServletHolder(new DefaultServlet()), "/*");
         try {
             server.start();
             server.join();
